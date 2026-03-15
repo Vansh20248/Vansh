@@ -1,160 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>You Said Yes!</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #ffe6f0, #e0c3fc);
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Featured Design</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            transition: background 0.5s;
+        }
 
-    h1 {
-      color: #d81b60;
-      font-size: 2.5em;
-      text-shadow: 0 0 10px pink;
-      margin-bottom: 30px;
-    }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-top: 20%;
+            animation: fadeIn 1s;
+        }
 
-    .heart-shape {
-      position: relative;
-      width: 200px;
-      height: 180px;
-      background: red;
-      transform: rotate(-45deg);
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-    .heart-shape::before,
-    .heart-shape::after {
-      content: "";
-      position: absolute;
-      width: 200px;
-      height: 180px;
-      background: red;
-      border-radius: 50%;
-    }
+        .interactive {
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
 
-    .heart-shape::before {
-      top: -100px;
-      left: 0;
-    }
+        .interactive:hover {
+            transform: scale(1.05);
+        }
 
-    .heart-shape::after {
-      left: 100px;
-      top: 0;
-    }
-
-    .heart-img {
-      position: absolute;
-      width: 200px;
-      height: 180px;
-      object-fit: cover;
-      z-index: 10;
-      transform: rotate(45deg);
-    }
-
-    .slideshow {
-      position: relative;
-      width: 200px;
-      height: 180px;
-    }
-
-    .slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .slide.active {
-      opacity: 1;
-    }
-
-    .message {
-      font-size: 1.2em;
-      color: #444;
-      max-width: 500px;
-      margin-top: 20px;
-    }
-
-    audio {
-      display: none;
-    }
-  </style>
+        @keyframes particle {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
-
-  <h1>You said YES!</h1>
-
-  <div class="slideshow">
-    <div class="slide active">
-      <div class="heart-shape">
-        <img src="1.jpg" class="heart-img" alt="1">
-      </div>
+    <h1>Welcome to the Modern Featured Page</h1>
+    <div class="interactive">
+        <p>Experience enhanced styling, animations, and better UX!</p>
     </div>
-    <div class="slide">
-      <div class="heart-shape">
-        <img src="2.jpg" class="heart-img" alt="2">
-      </div>
-    </div>
-    <div class="slide">
-      <div class="heart-shape">
-        <img src="3.jpg" class="heart-img" alt="3">
-      </div>
-    </div>
-    <div class="slide">
-      <div class="heart-shape">
-        <img src="4.jpg" class="heart-img" alt="4">
-      </div>
-    </div>
-    <div class="slide">
-      <div class="heart-shape">
-        <img src="5.jpg" class="heart-img" alt="5">
-      </div>
-    </div>
-    <div class="slide">
-      <div class="heart-shape">
-        <img src="6.jpg" class="heart-img" alt="6">
-      </div>
-    </div>
-    <div class="slide">
-      <div class="heart-shape">
-        <img src="7.jpg" class="heart-img" alt="7">
-      </div>
-    </div>
-  </div>
+    <script>
+        // Particle effect example
+        document.addEventListener('DOMContentLoaded', () => {
+            const particleDiv = document.createElement('div');
+            particleDiv.style.position = 'absolute';
+            particleDiv.style.width = '10px';
+            particleDiv.style.height = '10px';
+            particleDiv.style.borderRadius = '50%';
+            particleDiv.style.background = 'white';
+            particleDiv.style.animation = 'particle 1s infinite';
+            document.body.appendChild(particleDiv);
 
-  <div class="message">
-    Thank you for saying yes! This means so much to me.
-  </div>
-
-  <audio autoplay loop>
-    <source src="background_music.mp3" type="audio/mp3">
-  </audio>
-
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    let current = 0;
-
-    setInterval(() => {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
-    }, 2500);
-  </script>
-
+            // Add more particles and logic here...
+        });
+    </script>
 </body>
 </html>
