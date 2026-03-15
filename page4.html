@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
   <title>Your Answer</title>  
   <style>  
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap');  
-  
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {  
-      margin: 0;  
-      padding: 0;  
       font-family: 'Poppins', sans-serif;  
-      background: linear-gradient(to right, #ffe6f0, #e0c3fc);  
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #333;  
       display: flex;  
       justify-content: center;  
@@ -19,101 +23,134 @@
       height: 100vh;  
       overflow: hidden;  
       position: relative;  
-      text-align: center;  
-    }  
+      text-align: center;
+      animation: bgRotate 20s infinite linear;
+    }
+
+    @keyframes bgRotate {
+      0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+      50% { background: linear-gradient(225deg, #f093fb 0%, #f5576c 100%); }
+      100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    }
   
     .message-box {  
-      max-width: 700px;  
-      padding: 40px;  
-      background: rgba(255, 255, 255, 0.9);  
-      border-radius: 25px;  
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);  
+      max-width: 750px;  
+      padding: 60px 50px;  
+      background: rgba(255, 255, 255, 0.97);  
+      border-radius: 40px;  
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);  
       z-index: 10;  
-      position: relative;  
-    }  
+      position: relative;
+      animation: slideInScale 1s ease;
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes slideInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
   
     h1 {  
       font-family: 'Pacifico', cursive;  
-      font-size: 2.5em;  
-      color: #d81b60;  
-      text-shadow: 0 0 8px #ffb6f2;  
-      animation: glow 2s infinite alternate;  
-    }  
+      font-size: 2.8em;  
+      background: linear-gradient(135deg, #d81b60, #f50057);  
+      -webkit-background-clip: text;  
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+      margin-bottom: 40px;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px #f50057); }
+      to { filter: drop-shadow(0 0 15px #d81b60); }
+    }
   
     .btn-group {  
-      margin-top: 30px;  
+      margin-top: 40px;  
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
     }  
   
     .btn {  
-      background-color: #d81b60;  
+      background: linear-gradient(135deg, #667eea, #764ba2);  
       color: white;  
       border: none;  
-      padding: 12px 28px;  
-      margin: 0 15px;  
-      font-size: 1.1em;  
-      border-radius: 25px;  
+      padding: 15px 40px;  
+      font-size: 1.2em;  
+      border-radius: 50px;  
       cursor: pointer;  
-      transition: 0.3s ease;  
-      box-shadow: 0 5px 20px rgba(216, 27, 96, 0.5);  
+      transition: all 0.3s ease;  
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      font-weight: 600;
     }  
   
     .btn:hover {  
-      background-color: #ad1457;  
-      transform: scale(1.05);  
-    }  
+      transform: translateY(-3px);  
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+    }
   
     .confirmation-btn {  
-      background-color: #4caf50;  
+      background: linear-gradient(135deg, #4caf50, #66bb6a);  
       color: white;  
       border: none;  
-      padding: 12px 28px;  
-      font-size: 1.1em;  
-      border-radius: 25px;  
+      padding: 15px 40px;  
+      font-size: 1.2em;  
+      border-radius: 50px;  
       cursor: pointer;  
-      margin-top: 25px;  
-      box-shadow: 0 5px 15px rgba(0, 128, 0, 0.5);  
-      display: none;  
+      margin-top: 30px;  
+      box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+      display: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }  
   
     .confirmation-btn:hover {  
-      background-color: #45a049;  
-      transform: scale(1.05);  
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(76, 175, 80, 0.6);
     }  
   
     .heart {  
       position: fixed;  
-      font-size: 24px;  
-      animation: floatUp 5s linear forwards;  
+      font-size: 32px;  
+      animation: floatUp 7s linear forwards;  
       z-index: 9999;  
-      color: red;  
-      filter: drop-shadow(0 0 5px red) drop-shadow(0 0 15px red);  
+      color: #ff1744;  
+      filter: drop-shadow(0 0 8px #ff1744) drop-shadow(0 0 15px #f50057);  
     }  
   
     @keyframes floatUp {  
       0% {  
-        transform: translateY(0);  
+        transform: translateY(0) rotate(0deg);  
         opacity: 1;  
       }  
       100% {  
-        transform: translateY(-100vh);  
+        transform: translateY(-100vh) rotate(360deg);  
         opacity: 0;  
       }  
-    }  
-  
-    @keyframes glow {  
-      from { text-shadow: 0 0 5px #ffb6f2; }  
-      to { text-shadow: 0 0 15px #ff69b4; }  
     }  
   </style>  
 </head>  
 <body>  
   <div class="message-box">  
-    <h1>So... Do you feel the same way about me?</h1>  
+    <h1>So... Do you feel the same way about me? 💝</h1>  
     <div class="btn-group">  
-      <button class="btn" onclick="selectAnswer('yes')">Yes</button>  
-      <button class="btn" onclick="selectAnswer('no')">No</button>  
+      <button class="btn" onclick="selectAnswer('yes')">❤️ Yes</button>  
+      <button class="btn" onclick="selectAnswer('no')">💔 No</button>  
     </div>  
-    <button id="confirmationBtn" class="confirmation-btn" onclick="confirmAnswer()">Confirm</button>  
+    <button id="confirmationBtn" class="confirmation-btn" onclick="confirmAnswer()">Confirm ✓</button>  
   </div>  
   
   <script>  
@@ -126,14 +163,14 @@
       heart.innerText = "❤️";  
       heart.style.left = Math.random() * window.innerWidth + "px";  
       heart.style.top = window.innerHeight + "px";  
-      heart.style.fontSize = (16 + Math.random() * 20) + "px";  
-      heart.style.animationDuration = (3 + Math.random() * 2) + "s";  
+      heart.style.fontSize = (24 + Math.random() * 25) + "px";  
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";  
       document.body.appendChild(heart);  
-      setTimeout(() => heart.remove(), 5000);  
+      setTimeout(() => heart.remove(), 7000);  
     }  
   
     function startHeartEffect() {  
-      heartInterval = setInterval(createHeart, 200);  
+      heartInterval = setInterval(createHeart, 250);  
     }  
   
     function selectAnswer(answer) {  
