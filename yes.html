@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You Said Yes!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffe6f0, #e0c3fc);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #d81b60;
+      font-size: 2.5em;
+      text-shadow: 0 0 10px pink;
+      margin-bottom: 30px;
+    }
+
+    .heart-shape {
+      position: relative;
+      width: 200px;
+      height: 180px;
+      background: red;
+      transform: rotate(-45deg);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .heart-shape::before,
+    .heart-shape::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 180px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart-shape::before {
+      top: -100px;
+      left: 0;
+    }
+
+    .heart-shape::after {
+      left: 100px;
+      top: 0;
+    }
+
+    .heart-img {
+      position: absolute;
+      width: 200px;
+      height: 180px;
+      object-fit: cover;
+      z-index: 10;
+      transform: rotate(45deg);
+    }
+
+    .slideshow {
+      position: relative;
+      width: 200px;
+      height: 180px;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .message {
+      font-size: 1.2em;
+      color: #444;
+      max-width: 500px;
+      margin-top: 20px;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>You said YES!</h1>
+
+  <div class="slideshow">
+    <div class="slide active">
+      <div class="heart-shape">
+        <img src="1.jpg" class="heart-img" alt="1">
+      </div>
+    </div>
+    <div class="slide">
+      <div class="heart-shape">
+        <img src="2.jpg" class="heart-img" alt="2">
+      </div>
+    </div>
+    <div class="slide">
+      <div class="heart-shape">
+        <img src="3.jpg" class="heart-img" alt="3">
+      </div>
+    </div>
+    <div class="slide">
+      <div class="heart-shape">
+        <img src="4.jpg" class="heart-img" alt="4">
+      </div>
+    </div>
+    <div class="slide">
+      <div class="heart-shape">
+        <img src="5.jpg" class="heart-img" alt="5">
+      </div>
+    </div>
+    <div class="slide">
+      <div class="heart-shape">
+        <img src="6.jpg" class="heart-img" alt="6">
+      </div>
+    </div>
+    <div class="slide">
+      <div class="heart-shape">
+        <img src="7.jpg" class="heart-img" alt="7">
+      </div>
+    </div>
+  </div>
+
+  <div class="message">
+    Thank you for saying yes! This means so much to me.
+  </div>
+
+  <audio autoplay loop>
+    <source src="background_music.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 2500);
+  </script>
+
+</body>
+</html>
