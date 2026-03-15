@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Truth</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap');
 
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #333;
       display: flex;
       justify-content: center;
@@ -19,97 +23,117 @@
       height: 100vh;
       text-align: center;
       overflow: hidden;
+      position: relative;
     }
 
     .message-box {
-      max-width: 750px;
-      padding: 50px 40px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 30px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      padding: 60px 50px;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       position: relative;
-      animation: floatUp 1s ease;
+      animation: popIn 1s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1;
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     h1 {
       font-family: 'Pacifico', cursive;
-      color: #d81b60;
-      font-size: 2.8em;
-      text-shadow: 0 0 8px #ffb6f2;
+      background: linear-gradient(135deg, #d81b60, #f50057);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3.2em;
       animation: glow 2s infinite alternate;
+      margin-bottom: 30px;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px #f50057); }
+      to { filter: drop-shadow(0 0 15px #d81b60); }
     }
 
     .typed-text {
-      font-size: 1.3em;
-      color: #6a1b9a;
+      font-size: 1.35em;
+      color: #333;
       margin-top: 30px;
       white-space: pre-wrap;
       min-height: 200px;
-      line-height: 1.8;
+      line-height: 1.9;
+      letter-spacing: 0.5px;
     }
 
     .btn-next {
       margin-top: 40px;
-      background-color: #d81b60;
+      background: linear-gradient(135deg, #667eea, #764ba2);
       color: white;
       border: none;
-      padding: 14px 30px;
+      padding: 15px 40px;
       font-size: 1.2em;
-      border-radius: 25px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 5px 20px rgba(216, 27, 96, 0.5);
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      font-weight: 600;
     }
 
     .btn-next:hover {
-      background-color: #ad1457;
-      transform: scale(1.05);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
     }
 
     #playBtn {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #ff4f81;
+      top: 25px;
+      right: 25px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
       border: none;
       color: white;
-      padding: 10px 18px;
+      padding: 12px 24px;
       font-size: 1em;
-      border-radius: 20px;
+      border-radius: 50px;
       cursor: pointer;
       z-index: 100;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      font-weight: 600;
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #ffb6f2; }
-      to { text-shadow: 0 0 15px #ff69b4; }
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    #playBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     }
 
     .emoji-heart {
       position: fixed;
       top: 100vh;
-      font-size: 24px;
-      animation: floatEmoji 6s linear infinite;
+      font-size: 30px;
+      animation: floatEmoji 7s linear forwards;
       opacity: 0.9;
       z-index: 9999;
       pointer-events: none;
-      filter: drop-shadow(0 0 5px #ff69b4);
+      filter: drop-shadow(0 0 8px #d81b60) drop-shadow(0 0 15px #f50057);
     }
 
     @keyframes floatEmoji {
       0% {
-        transform: translateY(0);
+        transform: translateY(0) rotate(0deg);
         opacity: 1;
       }
       100% {
-        transform: translateY(-120vh);
+        transform: translateY(-120vh) rotate(180deg);
         opacity: 0;
       }
     }
@@ -120,10 +144,9 @@
   <div class="message-box">
     <h1 id="greeting"></h1>
     <p class="typed-text" id="typedText"></p>
-    <button class="btn-next" id="nextBtn" style="display: none;" onclick="goToPage4()">Tell me your answer</button>
+    <button class="btn-next" id="nextBtn" style="display: none;" onclick="goToPage4()">Tell me your answer →</button>
   </div>
 
-  <!-- Music and sound -->
   <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/audio/2023/02/21/audio_524da49917.mp3" type="audio/mpeg">
   </audio>
@@ -131,17 +154,17 @@
     <source src="https://cdn.pixabay.com/audio/2022/08/04/audio_9b7d72cd88.mp3" type="audio/mpeg">
   </audio>
 
-  <button onclick="startMusic()" id="playBtn">Play Music</button>
+  <button onclick="startMusic()" id="playBtn">🎵 Play Music</button>
 
   <script>
-    const name = localStorage.getItem("crushName") || "you";
-    document.getElementById("greeting").textContent = `Hey ${name}, just one more thing...`;
+    const name = localStorage.getItem("herName") || "you";
+    document.getElementById("greeting").textContent = `Hey ${name}, just one more thing... 💫`;
 
-    const text = `There’s something I’ve been meaning to say for a long time...
+    const text = `There's something I've been meaning to say for a long time...
 
-I don’t know when it started… I tried to ignore it, to push it away… but the truth is—I like you.
+I don't know when it started… I tried to ignore it, to push it away… but the truth is—I like you.
 
-I’ve said what’s in my heart… now I just need to know—could you ever feel the same way about me?`;
+I've said what's in my heart… now I just need to know—could you ever feel the same way about me?`;
 
     let i = 0;
     const speed = 40;
@@ -168,20 +191,19 @@ I’ve said what’s in my heart… now I just need to know—could you ever fee
       document.getElementById("playBtn").style.display = "none";
     }
 
-    // Floating emoji hearts
     function createEmojiHeart() {
       const heart = document.createElement("div");
       heart.classList.add("emoji-heart");
       heart.innerText = "💖";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      heart.style.animationDuration = 5 + Math.random() * 3 + "s";
       document.body.appendChild(heart);
       setTimeout(() => {
         heart.remove();
-      }, 7000);
+      }, 8000);
     }
 
-    setInterval(createEmojiHeart, 300);
+    setInterval(createEmojiHeart, 400);
 
     typeWriter();
   </script>
